@@ -1,0 +1,32 @@
+package br.com.mariah.controledecontas.domain;
+
+import br.com.mariah.controledecontas.genericcrud.anotation.CrudManaged;
+import br.com.mariah.controledecontas.genericcrud.domain.GenericEntity;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+@Entity
+public class Emprestimo implements GenericEntity<Long> {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    private Double valor;
+
+    private LocalDateTime dataContratacao;
+
+    @CrudManaged(resource = "banco")
+    @ManyToOne
+    @JoinColumn(name = "banco_id")
+    private Banco banco;
+
+}
