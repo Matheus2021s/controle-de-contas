@@ -9,7 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-import static br.com.mariah.controledecontas.genericcrud.anotation.DTOType.ALL;
+import static br.com.mariah.controledecontas.genericcrud.dto.DTOType.ALL;
 
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)

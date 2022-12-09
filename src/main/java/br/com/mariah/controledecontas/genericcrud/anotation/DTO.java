@@ -1,5 +1,7 @@
 package br.com.mariah.controledecontas.genericcrud.anotation;
 
+import br.com.mariah.controledecontas.genericcrud.dto.DTOType;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

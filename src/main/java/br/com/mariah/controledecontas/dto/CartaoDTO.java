@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
-import static br.com.mariah.controledecontas.genericcrud.anotation.DTOType.ALL;
+import static br.com.mariah.controledecontas.genericcrud.dto.DTOType.ALL;
 
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @Setter

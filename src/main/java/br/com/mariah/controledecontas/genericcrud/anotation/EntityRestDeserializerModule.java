@@ -1,5 +1,6 @@
 package br.com.mariah.controledecontas.genericcrud.anotation;
 
+import br.com.mariah.controledecontas.genericcrud.dto.DTOType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;

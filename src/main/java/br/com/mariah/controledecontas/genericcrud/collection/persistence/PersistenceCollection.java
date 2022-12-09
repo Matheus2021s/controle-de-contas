@@ -8,12 +8,9 @@ import java.util.List;
 
 @Component
 public class PersistenceCollection extends Collection<GenericPersistence> {
-
-    private List<GenericPersistence> genericPersistences;
-
-    public PersistenceCollection(final List<GenericPersistence> genericPersistences) {
+    
+    protected PersistenceCollection(final List<GenericPersistence> genericPersistences) {
         super(genericPersistences);
-        this.genericPersistences = genericPersistences;
     }
 
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-import static br.com.mariah.controledecontas.genericcrud.anotation.DTOType.*;
+import static br.com.mariah.controledecontas.genericcrud.dto.DTOType.*;
 
 @Component
 public class DTOResolver<T extends GenericDTO> {

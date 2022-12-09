@@ -33,6 +33,7 @@ public class ControleDeContasApplication implements CommandLineRunner {
 
 		Salario salario = Salario.builder().orcamento(orcamentoMesDeMaio).banco(bancoDoBrasil).dataEntrada(LocalDateTime.now()).valor(100000D).build();
 
+		Fatura fatura = Fatura.builder().cartao(cartaoBB).vencimento(LocalDateTime.now()).build();
 
 		persistenceCollection.resolveByClass(BancoPersistence.class).save(bancoDoBrasil);
 
@@ -43,6 +44,10 @@ public class ControleDeContasApplication implements CommandLineRunner {
 		persistenceCollection.resolveByClass(OrcamentoPersistence.class).save(orcamentoMesDeMaio);
 
 		persistenceCollection.resolveByClass(SalarioPersistence.class).save(salario);
+
+		persistenceCollection.resolveByClass(FaturaPersistence.class).save(fatura);
+
+
 
 	}
 }

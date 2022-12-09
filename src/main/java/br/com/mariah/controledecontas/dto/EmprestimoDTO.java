@@ -2,8 +2,9 @@ package br.com.mariah.controledecontas.dto;
 
 import br.com.mariah.controledecontas.domain.Emprestimo;
 import br.com.mariah.controledecontas.genericcrud.anotation.DTO;
-import br.com.mariah.controledecontas.genericcrud.anotation.DTOType;
+import br.com.mariah.controledecontas.genericcrud.dto.DTOType;
 import br.com.mariah.controledecontas.genericcrud.dto.GenericDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,6 +28,7 @@ public class EmprestimoDTO implements GenericDTO<Emprestimo,Long> {
     @DTO(types = DTOType.ALL)
     private BancoDTO banco = new BancoDTO();
 
+    @JsonIgnore
     @Override
     public Emprestimo toEntity() {
         return Emprestimo.builder()

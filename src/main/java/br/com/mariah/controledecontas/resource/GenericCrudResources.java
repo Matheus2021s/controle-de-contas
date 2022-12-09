@@ -18,11 +18,25 @@ public class GenericCrudResources extends Resource {
 
     private HashMap<String, ResourceItem> resourceMap() {
         HashMap<String, ResourceItem> map = new HashMap<>();
-        map.put("banco", new ResourceItem(Banco.class, BancoDTO.class, BancoPersistence.class));
+        map.put("banco", new ResourceItem(Banco.class, BancoDTO.class, BancoPersistence.class, getBancoSubResource()));
         map.put("salario", new ResourceItem(Salario.class, SalarioDTO.class, SalarioPersistence.class));
         map.put("orcamento", new ResourceItem(Orcamento.class, OrcamentoDTO.class, OrcamentoPersistence.class));
-        map.put("cartao", new ResourceItem(Cartao.class, CartaoDTO.class, CartaoPersistence.class));
         map.put("emprestimo", new ResourceItem(Emprestimo.class, EmprestimoDTO.class, EmprestimoPersistence.class));
+        map.put("parcela", new ResourceItem(Parcela.class, ParcelaDTO.class, ParcelaPersistence.class));
         return map;
     }
+
+    private HashMap<String, ResourceItem> getBancoSubResource() {
+        HashMap<String, ResourceItem> map = new HashMap<>();
+        map.put("cartao", new ResourceItem(Cartao.class, CartaoDTO.class, CartaoPersistence.class, getCartaoSubResources()));
+        return map;
+    }
+
+    private HashMap<String, ResourceItem> getCartaoSubResources() {
+        HashMap<String, ResourceItem> map = new HashMap<>();
+        map.put("fatura", new ResourceItem(Fatura.class, FaturaDTO.class, FaturaPersistence.class));
+        return map;
+    }
+
+
 }

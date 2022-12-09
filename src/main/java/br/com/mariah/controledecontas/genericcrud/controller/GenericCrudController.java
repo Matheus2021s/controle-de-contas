@@ -18,80 +18,73 @@ import org.springframework.web.bind.annotation.*;
 @Log4j2
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("api/crud")
+@RequestMapping("api/crud/")
 public class GenericCrudController {
     private final GenericCrudService genericCrudService;
-    private final ResourceResolver resourceResolver;
     private final DTOResolver dtoResolver;
 
 
-    @PostMapping("/{resource}")
-    public ResponseEntity<GenericDTO> create(@PathVariable String resource, @RequestBody String createDTOValues) {
-        log.info("Create request to resource : {} ", resource);
-        ResourceItem resolvedResource = resourceResolver.resolve(resource);
+    @PostMapping
+    public ResponseEntity<GenericDTO> create(@RequestAttribute("resourceType") ResourceItem resourceItem, @RequestBody String createDTOValues) {
+        log.info("Create request to resource : {} ", resourceItem);
 
-        GenericDTO genericCreateDTO = dtoResolver.create(resolvedResource, createDTOValues);
+        GenericDTO genericCreateDTO = dtoResolver.create(resourceItem, createDTOValues);
 
-        GenericEntity genericEntity = this.genericCrudService.create(resolvedResource, genericCreateDTO.toEntity());
+        GenericEntity genericEntity = this.genericCrudService.create(resourceItem, genericCreateDTO.toEntity());
 
-        GenericDTO response = dtoResolver.response(resolvedResource, genericEntity);
-
-        return ResponseEntity.ok(response);
-    }
-
-
-    @PutMapping("/{resource}")
-    public ResponseEntity<GenericDTO> update(@PathVariable String resource, @RequestBody String createDTOValues) {
-        log.info("Update request to resource : {} ", resource);
-        ResourceItem resolvedResource = resourceResolver.resolve(resource);
-
-        GenericDTO genericCreateDTO = dtoResolver.update(resolvedResource, createDTOValues);
-
-        GenericEntity genericEntity = this.genericCrudService.update(resolvedResource, genericCreateDTO.toEntity());
-
-        GenericDTO response = dtoResolver.response(resolvedResource, genericEntity);
+        GenericDTO response = dtoResolver.response(resourceItem, genericEntity);
 
         return ResponseEntity.ok(response);
     }
 
 
-    @GetMapping("/{resource}/{id}")
-    public ResponseEntity<GenericDTO> findById(@PathVariable String resource, @PathVariable Long id) {
+    @PutMapping
+    public ResponseEntity<GenericDTO> update(@RequestAttribute("resourceType") ResourceItem resourceItem, @RequestBody String createDTOValues) {
+        log.info("Update request to resource : {} ", resourceItem);
 
-        ResourceItem resolvedResource = resourceResolver.resolve(resource);
+        GenericDTO genericCreateDTO = dtoResolver.update(resourceItem, createDTOValues);
 
-        GenericDTO genericCreateDTO = dtoResolver.idDto(resolvedResource, id);
+        GenericEntity genericEntity = this.genericCrudService.update(resourceItem, genericCreateDTO.toEntity());
 
-        GenericEntity genericEntity = this.genericCrudService.findById(resolvedResource, genericCreateDTO.toEntity());
+        GenericDTO response = dtoResolver.response(resourceItem, genericEntity);
 
-        GenericDTO response = dtoResolver.response(resolvedResource, genericEntity);
+        return ResponseEntity.ok(response);
+    }
+
+
+    @GetMapping("{id}")
+    public ResponseEntity<GenericDTO> findById(@RequestAttribute("resourceType") ResourceItem resourceItem, @PathVariable Long id) {
+
+        GenericDTO genericCreateDTO = dtoResolver.idDto(resourceItem, id);
+
+        GenericEntity genericEntity = this.genericCrudService.findById(resourceItem, genericCreateDTO.toEntity());
+
+        GenericDTO response = dtoResolver.response(resourceItem, genericEntity);
 
         return ResponseEntity.ok(response);
 
     }
 
-    @DeleteMapping("/{resource}/{id}")
-    public ResponseEntity delete(@PathVariable String resource, @PathVariable Long id) {
+    @DeleteMapping("{id}")
+    public ResponseEntity delete(@RequestAttribute("resourceType") ResourceItem resourceItem, @PathVariable Long id) {
+        log.info("Delete request to resource : {} ", resourceItem);
 
-        ResourceItem resolvedResource = resourceResolver.resolve(resource);
+        GenericDTO genericCreateDTO = dtoResolver.idDto(resourceItem, id);
 
-        GenericDTO genericCreateDTO = dtoResolver.idDto(resolvedResource, id);
-
-        this.genericCrudService.delete(resolvedResource, genericCreateDTO.toEntity());
+        this.genericCrudService.delete(resourceItem, genericCreateDTO.toEntity());
 
         return ResponseEntity.noContent().build();
 
     }
 
 
-    @GetMapping("/{resource}")
-    public ResponseEntity<Page<GenericDTO>> paginatedList(@PathVariable String resource, Pageable pageable) {
+    @GetMapping
+    public ResponseEntity<Page<GenericDTO>> paginatedList(@RequestAttribute("resourceType") ResourceItem resourceItem, Pageable pageable) {
+        log.info("List request to resource : {} ", resourceItem);
 
-        ResourceItem resolvedResource = resourceResolver.resolve(resource);
+        Page<GenericEntity> genericEntityPage = this.genericCrudService.paginatedList(resourceItem, pageable);
 
-        Page<GenericEntity> genericEntityPage = this.genericCrudService.paginatedList(resolvedResource, pageable);
-
-        Page<GenericDTO> response = dtoResolver.pageResponse(resolvedResource, genericEntityPage);
+        Page<GenericDTO> response = dtoResolver.pageResponse(resourceItem, genericEntityPage);
 
         return ResponseEntity.ok(response);
 
