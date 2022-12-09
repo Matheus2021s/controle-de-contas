@@ -20,6 +20,7 @@ public class DependecyResolver {
     private final PersistenceCollection persistenceCollection;
     private final ResourceResolver resourceResolver;
     private final DTOResolver dtoResolver;
+
     public void resolve(GenericEntity entity, ResourceItem resource) {
 
         if (Objects.nonNull(entity)) {

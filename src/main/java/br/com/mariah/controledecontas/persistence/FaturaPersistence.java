@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class FaturaPersistence implements GenericPersistence<Fatura> {
 
     private final FaturaRepository faturaRepository;
+
     @Override
     public Fatura save(Fatura entity) {
         return faturaRepository.save(entity);

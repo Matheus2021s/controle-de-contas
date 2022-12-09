@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 public class EmprestimoPersistence implements GenericPersistence<Emprestimo> {
 
     private final EmprestimoRepository emprestimoRepository;
+
     @Override
     public Emprestimo save(Emprestimo entity) {
         return emprestimoRepository.save(entity);

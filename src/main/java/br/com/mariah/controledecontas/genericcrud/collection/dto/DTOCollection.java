@@ -14,6 +14,4 @@ public class DTOCollection extends Collection<GenericDTO> {
     }
 
 
-
-
 }

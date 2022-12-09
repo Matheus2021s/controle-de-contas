@@ -13,7 +13,7 @@ public abstract class Collection<T extends CollectionTarget> {
         this.list = new CopyOnWriteArrayList<>(list);
     }
 
-    public T resolveByClass(Class<? extends T> value){
+    public T resolveByClass(Class<? extends T> value) {
         return list.stream().filter(value::isInstance)
                 .findFirst()
                 .orElse(null);

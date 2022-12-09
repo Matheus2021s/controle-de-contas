@@ -13,7 +13,7 @@ import static br.com.mariah.controledecontas.genericcrud.dto.DTOType.ALL;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @Setter
 @Getter
-public class CartaoDTO implements GenericDTO<Cartao,Long> {
+public class CartaoDTO implements GenericDTO<Cartao, Long> {
 
     @DTO(types = ALL)
     private Long id;

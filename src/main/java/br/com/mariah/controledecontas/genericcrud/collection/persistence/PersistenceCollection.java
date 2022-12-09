@@ -8,7 +8,7 @@ import java.util.List;
 
 @Component
 public class PersistenceCollection extends Collection<GenericPersistence> {
-    
+
     protected PersistenceCollection(final List<GenericPersistence> genericPersistences) {
         super(genericPersistences);
     }

@@ -21,7 +21,7 @@ public class ParcelaPersistence implements GenericPersistence<Parcela> {
 
     @Override
     public void delete(Parcela entity) {
-         parcelaRepository.delete(entity);
+        parcelaRepository.delete(entity);
     }
 
     @Override

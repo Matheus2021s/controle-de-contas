@@ -4,7 +4,6 @@ import br.com.mariah.controledecontas.genericcrud.domain.GenericEntity;
 import br.com.mariah.controledecontas.genericcrud.dto.DTOResolver;
 import br.com.mariah.controledecontas.genericcrud.dto.GenericDTO;
 import br.com.mariah.controledecontas.genericcrud.resources.ResourceItem;
-import br.com.mariah.controledecontas.genericcrud.resources.ResourceResolver;
 import br.com.mariah.controledecontas.genericcrud.service.GenericCrudService;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

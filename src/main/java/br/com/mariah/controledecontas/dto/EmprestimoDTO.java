@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 @Setter
 @Getter
-public class EmprestimoDTO implements GenericDTO<Emprestimo,Long> {
+public class EmprestimoDTO implements GenericDTO<Emprestimo, Long> {
 
     @DTO(types = DTOType.ALL)
     private Long id;

@@ -2,7 +2,6 @@ package br.com.mariah.controledecontas.dto;
 
 import br.com.mariah.controledecontas.domain.Parcela;
 import br.com.mariah.controledecontas.genericcrud.anotation.DTO;
-import br.com.mariah.controledecontas.genericcrud.dto.DTOType;
 import br.com.mariah.controledecontas.genericcrud.dto.GenericDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -10,11 +9,11 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 
-import static br.com.mariah.controledecontas.genericcrud.dto.DTOType.*;
+import static br.com.mariah.controledecontas.genericcrud.dto.DTOType.ALL;
 
 @Setter
 @Getter
-public class ParcelaDTO implements GenericDTO<Parcela,Long> {
+public class ParcelaDTO implements GenericDTO<Parcela, Long> {
 
     @DTO(types = ALL)
     private Long id;

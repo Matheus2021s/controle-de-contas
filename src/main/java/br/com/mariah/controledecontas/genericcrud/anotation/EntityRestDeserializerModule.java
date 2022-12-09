@@ -58,7 +58,7 @@ public class EntityRestDeserializerModule<T> extends SimpleModule {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            JsonParser traverse =  treeNode.get(nodeName).traverse();
+            JsonParser traverse = treeNode.get(nodeName).traverse();
 
             traverse.setCodec(jsonParser.getCodec());
 

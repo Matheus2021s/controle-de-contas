@@ -14,40 +14,39 @@ import java.time.LocalDateTime;
 @SpringBootApplication
 public class ControleDeContasApplication implements CommandLineRunner {
 
-	private final PersistenceCollection persistenceCollection;
+    private final PersistenceCollection persistenceCollection;
 
-	public static void main(String[] args) {
-		SpringApplication.run(ControleDeContasApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ControleDeContasApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
+    @Override
+    public void run(String... args) throws Exception {
 
-		Banco bancoDoBrasil = Banco.builder().name("banco do brasil").build();
+        Banco bancoDoBrasil = Banco.builder().name("banco do brasil").build();
 
-		Cartao cartaoBB = Cartao.builder().banco(bancoDoBrasil).limite(100000D).build();
+        Cartao cartaoBB = Cartao.builder().banco(bancoDoBrasil).limite(100000D).build();
 
-		Emprestimo emprestimo = Emprestimo.builder().valor(5000D).banco(bancoDoBrasil).dataContratacao(LocalDateTime.now()).build();
+        Emprestimo emprestimo = Emprestimo.builder().valor(5000D).banco(bancoDoBrasil).dataContratacao(LocalDateTime.now()).build();
 
-		Orcamento orcamentoMesDeMaio = Orcamento.builder().name("orcamento mes de maio").build();
+        Orcamento orcamentoMesDeMaio = Orcamento.builder().name("orcamento mes de maio").build();
 
-		Salario salario = Salario.builder().orcamento(orcamentoMesDeMaio).banco(bancoDoBrasil).dataEntrada(LocalDateTime.now()).valor(100000D).build();
+        Salario salario = Salario.builder().orcamento(orcamentoMesDeMaio).banco(bancoDoBrasil).dataEntrada(LocalDateTime.now()).valor(100000D).build();
 
-		Fatura fatura = Fatura.builder().cartao(cartaoBB).vencimento(LocalDateTime.now()).build();
+        Fatura fatura = Fatura.builder().cartao(cartaoBB).vencimento(LocalDateTime.now()).build();
 
-		persistenceCollection.resolveByClass(BancoPersistence.class).save(bancoDoBrasil);
+        persistenceCollection.resolveByClass(BancoPersistence.class).save(bancoDoBrasil);
 
-		persistenceCollection.resolveByClass(CartaoPersistence.class).save(cartaoBB);
+        persistenceCollection.resolveByClass(CartaoPersistence.class).save(cartaoBB);
 
-		persistenceCollection.resolveByClass(EmprestimoPersistence.class).save(emprestimo);
+        persistenceCollection.resolveByClass(EmprestimoPersistence.class).save(emprestimo);
 
-		persistenceCollection.resolveByClass(OrcamentoPersistence.class).save(orcamentoMesDeMaio);
+        persistenceCollection.resolveByClass(OrcamentoPersistence.class).save(orcamentoMesDeMaio);
 
-		persistenceCollection.resolveByClass(SalarioPersistence.class).save(salario);
+        persistenceCollection.resolveByClass(SalarioPersistence.class).save(salario);
 
-		persistenceCollection.resolveByClass(FaturaPersistence.class).save(fatura);
+        persistenceCollection.resolveByClass(FaturaPersistence.class).save(fatura);
 
 
-
-	}
+    }
 }
