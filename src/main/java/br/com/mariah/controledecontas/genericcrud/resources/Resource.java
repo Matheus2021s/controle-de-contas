@@ -12,7 +12,4 @@ import java.util.HashMap;
 public abstract class Resource implements CollectionTarget {
     private HashMap<String, ResourceItem> resources;
 
-    public ResourceItem resolve(String endpoint){
-        return resources.get(endpoint);
-    }
 }

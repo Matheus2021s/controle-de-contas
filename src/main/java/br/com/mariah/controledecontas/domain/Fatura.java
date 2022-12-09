@@ -22,7 +22,7 @@ public class Fatura implements GenericEntity<Long> {
 
     private LocalDateTime vencimento;
 
-    @CrudManaged(resource = "cartao")
+    @CrudManaged(resource = "banco/cartao")
     @ManyToOne
     @JoinColumn(name = "cartao_id")
     private Cartao cartao;
