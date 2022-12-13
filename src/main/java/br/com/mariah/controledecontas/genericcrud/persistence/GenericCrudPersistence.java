@@ -2,6 +2,7 @@ package br.com.mariah.controledecontas.genericcrud.persistence;
 
 import br.com.mariah.controledecontas.genericcrud.domain.GenericEntity;
 import br.com.mariah.controledecontas.genericcrud.exception.ResourceNotFoundException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 @RequiredArgsConstructor
 public abstract class GenericCrudPersistence<T extends GenericEntity, ID, R extends JpaRepository<T, ID>> implements GenericPersistence<T> {
 
+    @Getter
+    private final Class<T> entityClass;
     private final R repository;
 
     @Override

@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class CartaoPersistence extends GenericCrudPersistence<Cartao, Long, CartaoRepository> {
 
     public CartaoPersistence(final CartaoRepository repository) {
-        super(repository);
+        super(Cartao.class, repository);
     }
 }

@@ -4,8 +4,6 @@ import br.com.mariah.controledecontas.genericcrud.anotation.CrudManaged;
 import br.com.mariah.controledecontas.genericcrud.collection.persistence.PersistenceCollection;
 import br.com.mariah.controledecontas.genericcrud.domain.GenericEntity;
 import br.com.mariah.controledecontas.genericcrud.dto.DTOResolver;
-import br.com.mariah.controledecontas.genericcrud.resources.ResourceItem;
-import br.com.mariah.controledecontas.genericcrud.resources.ResourceResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
@@ -18,27 +16,28 @@ import java.util.Objects;
 @Component
 public class DependecyResolver {
     private final PersistenceCollection persistenceCollection;
-    private final ResourceResolver resourceResolver;
     private final DTOResolver dtoResolver;
 
-    public void resolve(GenericEntity entity, ResourceItem resource) {
+    public void resolve(GenericEntity entity, Class<? extends GenericEntity> entityClass) {
 
         if (Objects.nonNull(entity)) {
 
-            for (Field declaredField : resource.getEntityClazz().getDeclaredFields()) {
+            for (Field declaredField : entityClass.getDeclaredFields()) {
 
                 for (Annotation annotation : declaredField.getAnnotations()) {
 
                     if (annotation instanceof CrudManaged) {
 
                         GenericEntity o = getFieldValueFromEntity(entity, declaredField);
-
+/*
                         String managegResourceName = ((CrudManaged) annotation).resource();
 
-                        ResourceItem managedResourceItem = resourceResolver.resolve(managegResourceName);
+                        ResourceItem managedResourceItem = resourceResolver.resolve(managegResourceName);*/
 
-                        GenericEntity entityToSet = this.persistenceCollection.resolveByClass(managedResourceItem.getPersistenceClazz())
-                                .findById(dtoResolver.idDto(managedResourceItem, (Long) o.getId()).toEntity());
+                        System.out.println(declaredField.getType());
+
+                        GenericEntity entityToSet = this.persistenceCollection.resolveByEntity(declaredField.getType())
+                                .findById(o);
 
                         setFieldInObject(declaredField, entity, entityToSet);
                     }

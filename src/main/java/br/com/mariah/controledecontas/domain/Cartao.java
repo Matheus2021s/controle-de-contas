@@ -20,7 +20,7 @@ public class Cartao implements GenericEntity<Long> {
 
     private Double limite;
 
-    @CrudManaged(resource = "banco")
+    @CrudManaged
     @ManyToOne
     @JoinColumn(name = "banco_id")
     private Banco banco;

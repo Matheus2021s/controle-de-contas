@@ -6,9 +6,9 @@ import br.com.mariah.controledecontas.repository.OrcamentoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrcamentoPersistence extends GenericCrudPersistence<Orcamento,Long,OrcamentoRepository> {
+public class OrcamentoPersistence extends GenericCrudPersistence<Orcamento, Long, OrcamentoRepository> {
 
     public OrcamentoPersistence(final OrcamentoRepository repository) {
-        super(repository);
+        super(Orcamento.class, repository);
     }
 }

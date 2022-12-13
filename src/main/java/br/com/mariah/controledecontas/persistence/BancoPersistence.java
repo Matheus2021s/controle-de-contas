@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BancoPersistence extends GenericCrudPersistence<Banco, Long, BancoRepository> {
     public BancoPersistence(final BancoRepository repository) {
-        super(repository);
+        super(Banco.class, repository);
     }
 
 

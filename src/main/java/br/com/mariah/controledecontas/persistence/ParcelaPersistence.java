@@ -6,9 +6,9 @@ import br.com.mariah.controledecontas.repository.ParcelaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ParcelaPersistence extends GenericCrudPersistence<Parcela,Long, ParcelaRepository> {
+public class ParcelaPersistence extends GenericCrudPersistence<Parcela, Long, ParcelaRepository> {
 
     public ParcelaPersistence(final ParcelaRepository repository) {
-        super(repository);
+        super(Parcela.class, repository);
     }
 }

@@ -1,67 +1,65 @@
 package br.com.mariah.controledecontas.genericcrud.service;
 
 
-import br.com.mariah.controledecontas.genericcrud.collection.persistence.PersistenceCollection;
 import br.com.mariah.controledecontas.genericcrud.domain.GenericEntity;
-import br.com.mariah.controledecontas.genericcrud.persistence.GenericPersistence;
-import br.com.mariah.controledecontas.genericcrud.resources.ResourceItem;
-import lombok.RequiredArgsConstructor;
+import br.com.mariah.controledecontas.genericcrud.persistence.GenericCrudPersistence;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 @Log4j2
-@RequiredArgsConstructor
-@Service
-public class GenericCrudService {
-
-    private final PersistenceCollection persistenceCollection;
-
+public abstract class GenericCrudService<E extends GenericEntity, ID, T extends JpaRepository<E, ID>, P extends GenericCrudPersistence<E, ID, T>> {
+    private final P persistence;
     private final DependecyResolver dependecyResolver;
 
-    public GenericEntity create(ResourceItem resource, GenericEntity entity) {
-        log.info("Service create resource : {}", resource);
+    private final Class<E> genericEntity;
 
-        dependecyResolver.resolve(entity, resource);
-
-        return persistenceCollection.resolveByClass(resource.getPersistenceClazz()).save(entity);
+    protected GenericCrudService(P persistence, DependecyResolver dependecyResolver, Class<E> genericEntity) {
+        this.persistence = persistence;
+        this.dependecyResolver = dependecyResolver;
+        this.genericEntity = genericEntity;
     }
 
 
-    public GenericEntity update(ResourceItem resource, GenericEntity entity) {
-        log.info("Service create resource : {}", resource);
+    public E create(E entity) {
+        log.info("Service create resource : {}", genericEntity.getSimpleName());
 
-        dependecyResolver.resolve(entity, resource);
+        dependecyResolver.resolve(entity, entity.getClass());
 
-        GenericPersistence genericPersistence = persistenceCollection.resolveByClass(resource.getPersistenceClazz());
-
-        genericPersistence.findById(entity);
-
-        return genericPersistence.save(entity);
-    }
-
-    public GenericEntity findById(ResourceItem resource, GenericEntity entity) {
-        log.info("Find by id {} resource : {}", entity.getId(), resource);
-
-        return persistenceCollection.resolveByClass(resource.getPersistenceClazz()).findById(entity);
+        return persistence.save(entity);
     }
 
 
-    public void delete(ResourceItem resource, GenericEntity entity) {
-        log.info("Delete by id {} resource : {}", entity.getId(), resource);
+    public E update(E entity) {
+        log.info("Service create resource : {}", genericEntity.getSimpleName());
 
-        GenericPersistence genericPersistence = persistenceCollection.resolveByClass(resource.getPersistenceClazz());
+        dependecyResolver.resolve(entity, entity.getClass());
 
-        GenericEntity genericEntity = genericPersistence.findById(entity);
+        persistence.findById(entity);
 
-        genericPersistence.delete(genericEntity);
+        return persistence.save(entity);
+    }
+
+    public E findById(E entity) {
+        log.info("Find by id {} resource : {}", entity.getId(), genericEntity.getSimpleName());
+
+        return persistence.findById(entity);
     }
 
 
-    public Page<GenericEntity> paginatedList(ResourceItem resource, Pageable pageable) {
-        log.info("Paginated list: {}  resource : {}", pageable, resource);
+    public void delete(E entity) {
+        log.info("Delete by id {} resource : {}", entity.getId(), genericEntity.getSimpleName());
 
-        return persistenceCollection.resolveByClass(resource.getPersistenceClazz()).list(pageable);
+        E genericEntity = persistence.findById(entity);
+
+        persistence.delete(genericEntity);
+    }
+
+
+    public Page<E> paginatedList(Pageable pageable) {
+        log.info("Paginated list: {}  resource : {}", pageable, genericEntity.getSimpleName());
+
+        return persistence.list(pageable);
     }
 }

@@ -24,7 +24,7 @@ public class Emprestimo implements GenericEntity<Long> {
 
     private LocalDateTime dataContratacao;
 
-    @CrudManaged(resource = "banco")
+    @CrudManaged
     @ManyToOne
     @JoinColumn(name = "banco_id")
     private Banco banco;

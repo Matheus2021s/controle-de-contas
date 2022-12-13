@@ -25,12 +25,12 @@ public class Salario implements GenericEntity<Long> {
 
     private Double valor;
 
-    @CrudManaged(resource = "orcamento")
+    @CrudManaged
     @ManyToOne
     @JoinColumn(name = "orcamento_id")
     private Orcamento orcamento;
 
-    @CrudManaged(resource = "banco")
+    @CrudManaged
     @ManyToOne
     @JoinColumn(name = "banco_id")
     private Banco banco;

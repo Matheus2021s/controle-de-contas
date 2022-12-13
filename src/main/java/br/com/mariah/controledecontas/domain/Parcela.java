@@ -25,13 +25,13 @@ public class Parcela implements GenericEntity<Long> {
 
     private LocalDateTime vencimento;
 
-    @CrudManaged(resource = "emprestimo")
+    @CrudManaged
     @ManyToOne
     @JoinColumn(name = "emprestimo_id")
     private Emprestimo emprestimo;
 
 
-    @CrudManaged(resource = "fatura")
+    @CrudManaged
     @OneToOne
     @JoinColumn(name = "fatura_id")
     private Fatura fatura;

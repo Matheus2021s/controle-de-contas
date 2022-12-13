@@ -1,16 +1,21 @@
 package br.com.mariah.controledecontas.genericcrud.collection.persistence;
 
 import br.com.mariah.controledecontas.genericcrud.collection.Collection;
-import br.com.mariah.controledecontas.genericcrud.persistence.GenericPersistence;
+import br.com.mariah.controledecontas.genericcrud.persistence.GenericCrudPersistence;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class PersistenceCollection extends Collection<GenericPersistence> {
+public class PersistenceCollection extends Collection<GenericCrudPersistence> {
 
-    protected PersistenceCollection(final List<GenericPersistence> genericPersistences) {
-        super(genericPersistences);
+
+    public PersistenceCollection(final List<GenericCrudPersistence> list) {
+        super(list);
     }
 
+    public GenericCrudPersistence resolveByEntity(Class<?> type) {
+        return getList().stream().filter(genericCrudPersistence -> genericCrudPersistence.getEntityClass().equals(type))
+                .findFirst().orElse(null);
+    }
 }

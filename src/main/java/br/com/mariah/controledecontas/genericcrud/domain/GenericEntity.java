@@ -5,5 +5,7 @@ import br.com.mariah.controledecontas.genericcrud.collection.CollectionTarget;
 public interface GenericEntity<T> extends CollectionTarget {
     T getId();
 
+    void setId(T id);
+
 
 }
