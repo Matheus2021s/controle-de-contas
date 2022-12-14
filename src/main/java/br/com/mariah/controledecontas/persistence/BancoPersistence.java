@@ -6,9 +6,9 @@ import br.com.mariah.controledecontas.repository.BancoRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class BancoPersistence extends GenericCrudPersistence<Banco, Long, BancoRepository> {
+public class BancoPersistence extends GenericCrudPersistence {
     public BancoPersistence(final BancoRepository repository) {
-        super(Banco.class, repository);
+        super(Banco.class, Long.class, repository);
     }
 
 

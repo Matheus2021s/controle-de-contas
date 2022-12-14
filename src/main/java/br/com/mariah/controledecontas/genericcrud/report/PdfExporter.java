@@ -19,6 +19,8 @@ import static br.com.mariah.controledecontas.genericcrud.report.ExporterType.PDF
 @Component
 public class PdfExporter implements ExporterHandler {
 
+    private static final String RESOURCE_REPORT_PATH_PLACEHOLDER = "src/main/resources/reports/%s.jrxml";
+    private static final String CLASSPATH_REPORT_PATH_PLACEHOLDER = "classpath:reports/%s.jrxml";
     private final JRXMLHelper jrxmlHelper;
 
     @Override
@@ -33,12 +35,12 @@ public class PdfExporter implements ExporterHandler {
         log.info("Generating pdf {}", reportName);
 
         try {
-            File file = new File(String.format("classpath:reports/%s.jrxml", reportName));
+            File file = new File(String.format(CLASSPATH_REPORT_PATH_PLACEHOLDER, reportName));
             if (!file.exists()) {
-                file = new File(String.format("src/main/resources/reports/%s.jrxml", reportName));
+                file = new File(String.format(RESOURCE_REPORT_PATH_PLACEHOLDER, reportName));
                 if (!file.exists()) {
                     jrxmlHelper.generateClass(entityClass, reportDTO);
-                    file = new File(String.format("src/main/resources/reports/%s.jrxml", reportName));
+                    file = new File(String.format(RESOURCE_REPORT_PATH_PLACEHOLDER, reportName));
                 }
             }
 

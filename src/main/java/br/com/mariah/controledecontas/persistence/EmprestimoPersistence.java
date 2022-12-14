@@ -6,9 +6,10 @@ import br.com.mariah.controledecontas.repository.EmprestimoRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmprestimoPersistence extends GenericCrudPersistence<Emprestimo, Long, EmprestimoRepository> {
-
-    public EmprestimoPersistence(EmprestimoRepository repository) {
-        super(Emprestimo.class, repository);
+public class EmprestimoPersistence extends GenericCrudPersistence {
+    public EmprestimoPersistence(final EmprestimoRepository repository) {
+        super(Emprestimo.class, Long.class, repository);
     }
+
+
 }

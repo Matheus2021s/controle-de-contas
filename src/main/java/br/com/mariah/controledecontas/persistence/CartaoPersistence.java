@@ -6,9 +6,9 @@ import br.com.mariah.controledecontas.repository.CartaoRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CartaoPersistence extends GenericCrudPersistence<Cartao, Long, CartaoRepository> {
+public class CartaoPersistence extends GenericCrudPersistence {
 
     public CartaoPersistence(final CartaoRepository repository) {
-        super(Cartao.class, repository);
+        super(Cartao.class, Long.class, repository);
     }
 }

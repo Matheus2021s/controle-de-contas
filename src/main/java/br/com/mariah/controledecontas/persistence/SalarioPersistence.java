@@ -7,9 +7,9 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class SalarioPersistence extends GenericCrudPersistence<Salario, Long, SalarioRepository> {
+public class SalarioPersistence extends GenericCrudPersistence {
 
     public SalarioPersistence(SalarioRepository repository) {
-        super(Salario.class, repository);
+        super(Salario.class, Long.class, repository);
     }
 }

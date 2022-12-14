@@ -3,21 +3,22 @@ package br.com.mariah.controledecontas.genericcrud.service;
 
 import br.com.mariah.controledecontas.genericcrud.domain.GenericEntity;
 import br.com.mariah.controledecontas.genericcrud.persistence.GenericCrudPersistence;
+import lombok.Getter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+@Getter
 @Log4j2
 public abstract class GenericCrudService<E extends GenericEntity, ID, T extends JpaRepository<E, ID>, P extends GenericCrudPersistence<E, ID, T>> {
     private final P persistence;
-    private final DependecyResolver dependecyResolver;
-
+    private DependecyResolver dependecyResolver;
     private final Class<E> genericEntity;
 
-    protected GenericCrudService(P persistence, DependecyResolver dependecyResolver, Class<E> genericEntity) {
+    protected GenericCrudService(P persistence, Class<E> genericEntity) {
         this.persistence = persistence;
-        this.dependecyResolver = dependecyResolver;
         this.genericEntity = genericEntity;
     }
 
@@ -62,4 +63,10 @@ public abstract class GenericCrudService<E extends GenericEntity, ID, T extends 
 
         return persistence.list(pageable);
     }
+
+    @Autowired
+    public void setDependecyResolver(DependecyResolver dependecyResolver) {
+        this.dependecyResolver = dependecyResolver;
+    }
+
 }

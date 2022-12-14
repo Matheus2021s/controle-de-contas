@@ -6,9 +6,9 @@ import br.com.mariah.controledecontas.repository.FaturaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public class FaturaPersistence extends GenericCrudPersistence<Fatura, Long, FaturaRepository> {
+public class FaturaPersistence extends GenericCrudPersistence {
 
     public FaturaPersistence(FaturaRepository repository) {
-        super(Fatura.class, repository);
+        super(Fatura.class, Long.class, repository);
     }
 }
